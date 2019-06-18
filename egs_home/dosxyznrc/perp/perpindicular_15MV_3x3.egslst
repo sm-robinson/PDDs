@@ -1,0 +1,209 @@
+ *******************************************************************************
+ NRCC/UW EGSnrc user-code DOSXYZnrc ($Revision: 1.56 $ last edited $Date: 2014/10/08 15:12:01 $)
+ ON linux64                                                10:34:16 Jun  5 2019
+ *******************************************************************************
+ **                                                                           **
+ **                                  DOSXYZnrc                                **
+ **                              Z pronounced zed                             **
+ **                                                                           **
+ **      Code developed at the National Research Council of Canada and        **
+ **           University of Wisconsin as part of the OMEGA project            **
+ **                                                                           **
+ **           This is $Revision: 1.56 $ last edited $Date: 2014/10/08 15:12:01**
+ **                                                                           **
+ *******************************************************************************
+
+     The following parameters may be adjusted in dosxyz_user_macros.mortran
+ $MXMED:    Max number of media:  7
+ $MXSTACK:  Max stack size:     10000
+ $IMAX,etc: Max dose scoring regions in x,y,z directions:  256  256  256
+ $MAXDOSE:  Max dose scoring regions consistent with above:*******
+ $DOSEZERO(=1) 1=> all doses with uncert > 50% are zeroed in .3ddose file
+
+
+ The following parameters may be adjusted in srcxyz.macros
+ $INVDIM:   number of elements in inverse CPD for input energy spectra = 1000
+ $NENSRC:   number of bins in input energy spectrum =  200
+
+ ===============================================================================
+ -------------------------------------------------------------------------------
+
+ Title:  perp_no_air_realVS                                                              
+ -------------------------------------------------------------------------------
+ ===============================================================================
+
+
+ Number of media (min = 1, max =   7, 0 => CT data):                0
+ Input the full name of the file containing the CT phantom created 
+ using ctcreate 
+ : /home/spencermrobinson/egs_home/egsphant/perp_real.egsphant
+
+ CT Phantom summary: 
+
+ NMED =  3
+
+ media:
+ H2O516                  
+ POLY516                 
+ ACTIVE516               
+
+ Dummy values of (ESTEPM(i),i=1,NMED)
+ :      0.000     0.000     0.000
+
+ IMAX, JMAX, KMAX :  105 105 117
+
+ x range :    -10.50000 -     10.50000 cm
+ y range :    -10.50000 -     10.50000 cm
+ z range :      0.00000 -     30.00000 cm
+
+ Densities range from      1.00000 -      1.35000 g/cc
+
+ ECUTIN,PCUTIN,(SMAX--DUMMY INPUT): 
+              0.516     0.005     0.000
+
+ Input zeroairdose (1 to zero dose in air in .3ddosefile; 0[default]
+ to not zero this dose), doseprint (1 for full dose output in .egslst;
+ 0[default] otherwise), MAX20 (1 to print out summary of 20 highest
+ doses; 0[default] to not print this summary)
+ :     0    0    1
+
+   Read input energy spectrum from: 
+/scratch/dylanb/EGSnrc/HEN_HOUSE/spectra/mohan15.spectrum                       
+  Have read   58 input energy bins from file
+      Counts/MeV assumed
+    Energy ranges from     0.000 MeV to      14.500 MeV
+
+
+
+ *******WARNING******
+                   SOME OF NORMALIZED BIN PROBABILITIES SO SMALL BINS MAY BE MISSED
+
+
+
+ NCASE,IWATCH,TIMMAX,INSEED1,INSEED2,BEAM_SIZE,ISMOOTH,IRESTART,IDAT,
+ IREJECT,ESAVE_GLOBAL,NRCYCL,IPARALLEL,PARNUM,n_split,ihowfarless,i_phsp_out
+ : 
+   700000000   0 500.00        33        97 100.00      0    4   0   0   0.00   0   0   0   1   0   0
+
+
+================================================================================
+
+                   Electron/Photon transport parameter
+
+================================================================================
+
+ Photon cross sections                                      xcom
+ Compton cross sections                                     default
+ Photon transport cutoff(MeV)                                    0.5000E-02
+ Pair angular sampling                                       SIM
+ Pair cross sections                                         BH 
+ Triplet production                                          Off
+ Bound Compton scattering                                    ON            
+ Radiative Compton corrections                               Off           
+ Rayleigh scattering                                         ON            
+ Atomic relaxations                                          ON            
+ Photoelectron angular sampling                              OFF           
+
+ Electron transport cutoff(MeV)                               0.5160
+ Bremsstrahlung cross sections                              BH  
+ Bremsstrahlung angular sampling                             SIM
+ Spin effects                                                On
+ Electron Impact Ionization                                  ik
+ Maxium electron step in cm (SMAX)                                5.000    
+ Maximum fractional energy loss/step (ESTEPE)                0.2500
+ Maximum 1st elastic moment/step (XIMAX)                     0.5000
+ Boundary crossing algorithm                                 PRESTA-I  
+ Skin-depth for boundary crossing (MFP)                      13.63    
+ Electron-step algorithm                                     PRESTA-II 
+
+================================================================================
+
+ 
+
+ *******************************************************************************
+
+         Summary of source parameters (srcxyznrc $Revision: 1.39 $)
+ *******************************************************************************
+
+               Parallel beam incident from an arbitrary direction
+
+                    Electric charge of the source:                      0
+                    x-coordinate of the isocenter,               0.0000 cm
+                    y-coordinate of the isocenter,               0.0000 cm
+                    z-coordinate of the isocenter,               0.0000 cm
+                    Polar angle of collimator center:          180.0000 degrees
+                    Azimuthal angle of collimator center:       90.0000 degrees
+                    Total x-width of collimator,                 3.0000 cm
+                    Total y-width of collimator,                 3.0000 cm
+                    Collimator rotation angle,                   0.0000 degrees
+
+
+ Medium                AE        AP
+ H2O516              0.516     0.005
+ POLY516             0.516     0.005
+ ACTIVE516           0.516     0.005
+
+ Summing the following .pardose files
+ ------------------------------------
+
+/home1l/spencermrobinson/egs_home/dosxyznrc/perpindicular_15MV_3x3_w1.pardose
+/home1l/spencermrobinson/egs_home/dosxyznrc/perpindicular_15MV_3x3_w2.pardose
+/home1l/spencermrobinson/egs_home/dosxyznrc/perpindicular_15MV_3x3_w3.pardose
+/home1l/spencermrobinson/egs_home/dosxyznrc/perpindicular_15MV_3x3_w4.pardose
+/home1l/spencermrobinson/egs_home/dosxyznrc/perpindicular_15MV_3x3_w5.pardose
+/home1l/spencermrobinson/egs_home/dosxyznrc/perpindicular_15MV_3x3_w6.pardose
+/home1l/spencermrobinson/egs_home/dosxyznrc/perpindicular_15MV_3x3_w7.pardose
+/home1l/spencermrobinson/egs_home/dosxyznrc/perpindicular_15MV_3x3_w8.pardose
+/home1l/spencermrobinson/egs_home/dosxyznrc/perpindicular_15MV_3x3_w9.pardose
+/home1l/spencermrobinson/egs_home/dosxyznrc/perpindicular_15MV_3x3_w10.pardose
+
+
+1perp_no_air_realVS                                                              
+
+         DOSXYZnrc ($Revision: 1.56 $)Dose outputs (dose/F, Gy.cm**2)
+
+    full dose output suppressed in this run
+
+ The dose values in      13125 voxels had error > 50% and have been
+ zeroed in the .3ddose file.
+
+
+ average of 20 highest doses =                                0.16965E-10 Gy/particle
+ average % error of 20 highest doses =                         0.603 %
+ average % error of doses >  0.500 of max dose =               0.575 %
+ (average error of doses >  0.500 of max dose)/(max dose) =    0.377 %
+ quadrature average % error of doses >  0.500 of max dose =    0.594 %
+ There are       13146 voxelswith dose >   0.500 of max dose 
+
+ 20 highest doses: 
+ 
+        dose (Gy/particle)                     (x,y,z) (cm)
+        -----------------                      ------------
+
+  0.17156E-10 +/-      0.60386 %  (      0.20000,     0.20000,     4.00000 )
+  0.17111E-10 +/-      0.60302 %  (      0.20000,     0.00000,     4.00000 )
+  0.17057E-10 +/-      0.60793 %  (      0.20000,     0.00000,     3.00000 )
+  0.17040E-10 +/-      0.60168 %  (      0.20000,    -0.20000,     4.00000 )
+  0.17037E-10 +/-      0.60179 %  (      0.00000,    -0.20000,     3.00000 )
+  0.17021E-10 +/-      0.60107 %  (      0.20000,     0.20000,     3.00000 )
+  0.16999E-10 +/-      0.60794 %  (      0.00000,     0.20000,     4.00000 )
+  0.16973E-10 +/-      0.59650 %  (      0.00000,     0.00000,     4.00000 )
+  0.16960E-10 +/-      0.60511 %  (      0.40000,     0.00000,     4.00000 )
+  0.16953E-10 +/-      0.60559 %  (     -0.40000,     0.00000,     3.00000 )
+  0.16950E-10 +/-      0.60548 %  (      0.00000,     0.00000,     3.00000 )
+  0.16938E-10 +/-      0.59589 %  (     -0.20000,     0.00000,     4.00000 )
+  0.16900E-10 +/-      0.59906 %  (     -0.20000,    -0.20000,     4.00000 )
+  0.16896E-10 +/-      0.61005 %  (      0.40000,    -0.20000,     4.00000 )
+  0.16894E-10 +/-      0.60308 %  (      0.40000,    -0.20000,     3.00000 )
+  0.16893E-10 +/-      0.60126 %  (      0.20000,     0.40000,     4.00000 )
+  0.16892E-10 +/-      0.60163 %  (      0.20000,    -0.40000,     4.00000 )
+  0.16884E-10 +/-      0.60038 %  (      0.20000,    -0.20000,     3.00000 )
+  0.16880E-10 +/-      0.60372 %  (      0.60000,    -0.20000,     4.00000 )
+  0.16860E-10 +/-      0.59674 %  (     -0.20000,     0.20000,     4.00000 )
+
+ Total CPU time for this run =     4.2 s =   0.001 hr
+
+ CPU time is for combining .pardose files only.
+
+ END OF RUN          Jun  5 2019 10:34:20
+

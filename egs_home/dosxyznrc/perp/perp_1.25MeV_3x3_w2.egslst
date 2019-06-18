@@ -1,0 +1,223 @@
+ *******************************************************************************
+ NRCC/UW EGSnrc user-code DOSXYZnrc ($Revision: 1.56 $ last edited $Date: 2014/10/08 15:12:01 $)
+ ON linux64                                                10:47:59 Jun  5 2019
+ *******************************************************************************
+ **                                                                           **
+ **                                  DOSXYZnrc                                **
+ **                              Z pronounced zed                             **
+ **                                                                           **
+ **      Code developed at the National Research Council of Canada and        **
+ **           University of Wisconsin as part of the OMEGA project            **
+ **                                                                           **
+ **           This is $Revision: 1.56 $ last edited $Date: 2014/10/08 15:12:01**
+ **                                                                           **
+ *******************************************************************************
+
+     The following parameters may be adjusted in dosxyz_user_macros.mortran
+ $MXMED:    Max number of media:  7
+ $MXSTACK:  Max stack size:     10000
+ $IMAX,etc: Max dose scoring regions in x,y,z directions:  256  256  256
+ $MAXDOSE:  Max dose scoring regions consistent with above:*******
+ $DOSEZERO(=1) 1=> all doses with uncert > 50% are zeroed in .3ddose file
+
+
+ The following parameters may be adjusted in srcxyz.macros
+ $INVDIM:   number of elements in inverse CPD for input energy spectra = 1000
+ $NENSRC:   number of bins in input energy spectrum =  200
+
+ ===============================================================================
+ -------------------------------------------------------------------------------
+
+ Title:  perp_no_air_realVS                                                              
+ -------------------------------------------------------------------------------
+ ===============================================================================
+
+
+ Number of media (min = 1, max =   7, 0 => CT data):                0
+ Input the full name of the file containing the CT phantom created 
+ using ctcreate 
+ : /home/spencermrobinson/egs_home/egsphant/perp_real.egsphant
+
+ CT Phantom summary: 
+
+ NMED =  3
+
+ media:
+ H2O516                  
+ POLY516                 
+ ACTIVE516               
+
+ Dummy values of (ESTEPM(i),i=1,NMED)
+ :      0.000     0.000     0.000
+
+ IMAX, JMAX, KMAX :  105 105 117
+
+ x range :    -10.50000 -     10.50000 cm
+ y range :    -10.50000 -     10.50000 cm
+ z range :      0.00000 -     30.00000 cm
+
+ Densities range from      1.00000 -      1.35000 g/cc
+
+ ECUTIN,PCUTIN,(SMAX--DUMMY INPUT): 
+              0.516     0.005     0.000
+
+ Input zeroairdose (1 to zero dose in air in .3ddosefile; 0[default]
+ to not zero this dose), doseprint (1 for full dose output in .egslst;
+ 0[default] otherwise), MAX20 (1 to print out summary of 20 highest
+ doses; 0[default] to not print this summary)
+ :     0    0    1
+
+   Read input energy spectrum from: 
+/home/spencermrobinson/egs_home/spectra/co60.spectrum                           
+  Have read   27 input energy bins from file
+      Counts/bin assumed
+    Energy ranges from     0.010 MeV to       1.335 MeV
+
+
+
+ *******WARNING******
+                   SOME OF NORMALIZED BIN PROBABILITIES SO SMALL BINS MAY BE MISSED
+
+
+
+ NCASE,IWATCH,TIMMAX,INSEED1,INSEED2,BEAM_SIZE,ISMOOTH,IRESTART,IDAT,
+ IREJECT,ESAVE_GLOBAL,NRCYCL,IPARALLEL,PARNUM,n_split,ihowfarless,i_phsp_out
+ : 
+    70000000   0 500.00        33        98 100.00      0    0   0   0   0.00   0  10   2   1   0   0
+
+
+================================================================================
+
+                   Electron/Photon transport parameter
+
+================================================================================
+
+ Photon cross sections                                      xcom
+ Compton cross sections                                     default
+ Photon transport cutoff(MeV)                                    0.5000E-02
+ Pair angular sampling                                       SIM
+ Pair cross sections                                         BH 
+ Triplet production                                          Off
+ Bound Compton scattering                                    ON            
+ Radiative Compton corrections                               Off           
+ Rayleigh scattering                                         ON            
+ Atomic relaxations                                          ON            
+ Photoelectron angular sampling                              OFF           
+
+ Electron transport cutoff(MeV)                               0.5160
+ Bremsstrahlung cross sections                              BH  
+ Bremsstrahlung angular sampling                             SIM
+ Spin effects                                                On
+ Electron Impact Ionization                                  ik
+ Maxium electron step in cm (SMAX)                                5.000    
+ Maximum fractional energy loss/step (ESTEPE)                0.2500
+ Maximum 1st elastic moment/step (XIMAX)                     0.5000
+ Boundary crossing algorithm                                 PRESTA-I  
+ Skin-depth for boundary crossing (MFP)                      13.63    
+ Electron-step algorithm                                     PRESTA-II 
+
+================================================================================
+
+ 
+
+ *******************************************************************************
+
+         Summary of source parameters (srcxyznrc $Revision: 1.39 $)
+ *******************************************************************************
+
+               Parallel beam incident from an arbitrary direction
+
+                    Electric charge of the source:                      0
+                    x-coordinate of the isocenter,               0.0000 cm
+                    y-coordinate of the isocenter,               0.0000 cm
+                    z-coordinate of the isocenter,               0.0000 cm
+                    Polar angle of collimator center:          180.0000 degrees
+                    Azimuthal angle of collimator center:       90.0000 degrees
+                    Total x-width of collimator,                 3.0000 cm
+                    Total y-width of collimator,                 3.0000 cm
+                    Collimator rotation angle,                   0.0000 degrees
+
+
+ Medium                AE        AP
+ H2O516              0.516     0.005
+ POLY516             0.516     0.005
+ ACTIVE516           0.516     0.005
+
+ No range rejection.
+
+
+ ***************************************************************
+
+  Histories to be simulated for this run     70000000
+
+  Histories to be analyzed after this run    70000000
+
+ ***************************************************************
+   Elapsed wall clock time to this point=       1.314 s
+
+
+   CPU time so far for this run =       1.312 s
+
+
+ BATCH #  TIME-ELAPSED  TOTAL CPUTIME  RATIO  TIME OF DAY  RNG pointers
+
+     1          0.0            0.0      0.00    10:48:00   ixx jxx =   97  33 
+     2       1349.7         1348.5      1.00    11:10:30   ixx jxx =   71   7 
+     3       2737.5         2735.3      1.00    11:33:37   ixx jxx =    3  36 
+     4       4063.4         4060.3      1.00    11:55:43   ixx jxx =   38  71 
+     5       5206.3         5202.6      1.00    12:14:46   ixx jxx =   65   1 
+     6       6428.2         6423.7      1.00    12:35:08   ixx jxx =   68   4 
+     7       7666.5         7661.2      1.00    12:55:46   ixx jxx =   19  52 
+     8       8907.2         8900.9      1.00    13:16:27   ixx jxx =   28  61 
+     9      10128.6        10121.2      1.00    13:36:49   ixx jxx =   70   6 
+    10      11288.5        11280.5      1.00    13:56:08   ixx jxx =   16  49 
+
+ Total CPU time for run = 12441.9 s =   3.456 hr =>   20254143. hist/hr
+   On  linux64 
+
+  ********************************************************************
+
+  # of particles which missed the phantom with source 1       =           0
+
+  ********************************************************************
+
+ Fraction of incident energy deposited in the phantom =      0.5573
+
+
+ Number of charged particle steps simulated,   N_step   =     5579664408
+ Number of charged particle steps/incident fluence      =    7.17385E+02
+ No. of PRESTA-II steps/total no. of charged particle steps =        0.90812
+
+1perp_no_air_realVS                                                              
+
+    Elec/positron planar energy fluence scored in a 1cm**2 circle 
+    centered at z-axis on the phantom surface =  0.000E+00(1/cm**2)
+
+    Photon planar energy fluence scored in a 1cm**2 circle 
+    centered at z-axis on thephantom surface =  8.213E+06(1/cm**2)
+
+    Elec/positron planarfluence scored in a 1cm**2 circle 
+    centered at z-axis on the phantom surface =  0.000E+00(1/cm**2)
+
+    Photon planar fluence scored in a 1cm**2 circle 
+    centered at z-axis on the phantom surface =  7.781E+06(1/cm**2)
+
+    Average planar fluence (number/beam area), F =  7.778E+06(1/cm**2)
+
+         DOSXYZnrc ($Revision: 1.56 $) Dose outputs (dose/F, Gy.cm**2)
+
+    full dose output suppressed in this run
+
+ The dose values in     472849 voxels had error > 50% and have been
+ zeroed in the .3ddose file.
+
+
+
+ No dose outputs since this is a parallel run 
+
+
+
+ Total CPU time for this run = 12447.0 s =   3.458 hr
+
+ END OF RUN          Jun  5 2019 14:15:34
+
